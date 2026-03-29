@@ -1,6 +1,6 @@
 # Sync AI OS
 
-> Turn social intention into real-world connection -- the AI backbone for Sync's growth engine.
+> Your AI-powered operations toolkit -- built specifically for where Sync is right now.
 
 **Built by [Gold Star AI](https://goldstarai.com) for Anouk Frieden | HBS Strategy for Entrepreneurs (1257)**
 
@@ -8,85 +8,125 @@
 
 ## What Is This?
 
-Sync AI OS is a 3-agent AI operating system built for **Sync**, a mobile-first AI platform that maps your social network, surfaces who to spend time with, and curates activities aligned with your goals.
+This is an **AI Operating System** custom-built for Sync. It gives you 5 AI agents that work as specialized assistants, each focused on a specific challenge Sync faces right now. They're informed by your SFE memo -- your experiment results, your pricing data, your growth challenges, and the specific feedback from your pilot users.
 
-These agents are designed for Sync's current stage: **pre-seed, post-MVP validation**. They target the five things that matter most right now.
+You talk to them in plain language. They think, then do the work -- creating spreadsheets, documents, and analyses in Google Workspace. Think of them as five very focused interns who've read everything about Sync and never forget anything.
 
-## The 5 Agents
+---
 
-| Agent | Command | What It Does |
-|-------|---------|--------------|
-| **@experiment-lab** | `/experiment` | Design and track lean startup experiments with clear hypotheses, budgets, and theory-of-value updates |
-| **@growth-hacker** | `/growth` | Model viral loops, optimize CAC, design referral experiments, plan city launches |
-| **@match-quality** | `/match` | Track suggestion acceptance/override rates, analyze why recommendations miss, tune the preference engine |
-| **@network-bootstrapper** | `/bootstrap` | Model network density, design the Day 1 solo-user experience, find connector nodes, plan city launches |
-| **@user-voice** | `/research` | Prep user interviews, capture feedback, track NPS, synthesize feature priorities |
+## Your 5 Agents
 
-## Quick Start
+### 1. @experiment-lab -- Your Experiment Partner
 
-### Prerequisites
-- [Claude Code](https://claude.ai/code) installed
-- Google Workspace MCP connected
+**The problem it solves:** The SFE methodology requires rigorous experiments, but structuring hypotheses, defining success criteria, and tracking results across multiple experiments gets messy fast.
 
-### Run Your First Command
+**What it does:** You tell it what you want to test, and it builds you a complete experiment brief -- hypothesis, success criteria, budget, timeline, and what to measure. After you run the experiment, you feed it results, and it updates your Theory of Value, tells you whether P and V went up or down, and recommends whether to develop, pivot, or kill. It keeps a running log of all your experiments so the learning compounds.
 
-```bash
-# Open this directory in Claude Code
-cd sync-os
+**Example:** "Design an experiment to test whether a referral bonus reduces CAC below $3" -- and it builds the full brief with measurable criteria and a budget cap.
 
-# Design your next experiment
-/experiment design "Friend-invite onboarding flow achieves k > 0.5 in pilot cohort"
+---
 
-# Analyze your growth funnel
-/growth analyze
+### 2. @growth-hacker -- Your Acquisition Strategist
 
-# Audit suggestion quality
-/match audit
+**The problem it solves:** Paid ads didn't work ($16.60 per user on a $4.99/month product). You need to figure out organic and viral growth, but the math is complex -- viral coefficients, referral loops, city-level density -- and guessing wrong is expensive.
 
-# Model network density for a city launch
-/bootstrap density-model zurich
+**What it does:** It models the viral loop math for you. How many invites does each user send? What percentage accept? What percentage actually activate? It projects growth curves, tracks your cost per user across different channels, and designs city-specific launch plans. It also calls out when something won't work before you spend money on it.
 
-# Prep for user interviews
-/research prep "churned users"
+**Example:** "Model what growth looks like if we launch in Zurich with 50 seed users and achieve a 0.6 viral coefficient" -- and it projects the curve and tells you when (or if) you'd hit self-sustaining growth.
+
+---
+
+### 3. @match-quality -- Your Recommendation Tuner
+
+**The problem it solves:** Your pilot users said "I'd rather go to a piano bar, not a violin concert." The override feature was a quick fix, but the deeper issue remains: how does Sync learn what someone actually wants? If the suggestions don't land, people stop opening the app. The recommendation engine is the product.
+
+**What it does:** It tracks whether your suggestions are actually working -- not just whether someone taps "accept," but whether they show up to the event. It categorizes WHY suggestions miss: was it the wrong activity type? Wrong friend pairing? Wrong time? Wrong vibe? It spots the difference between what users say they want (their goals during onboarding) and what they actually choose (their real behavior). Over time, it shows you exactly where your recommendation engine is improving and where it's still broken.
+
+**Example:** "Show me the override analysis for the last 30 days" -- and it tells you that 40% of overrides are "right idea, wrong venue" (meaning your logic is close but your event data needs work), which is a very different fix than if they were saying "wrong activity type entirely."
+
+---
+
+### 4. @network-bootstrapper -- Your Cold Start Strategist
+
+**The problem it solves:** Your users told you the hard truth: "friends need to already be on Sync." But someone has to be first. This is the chicken-and-egg problem that kills most social products. Sync is most useful when your friends are on it, but your friends won't join until it's useful.
+
+**What it does:** It models the math of network density. How many users do you need in one city before new signups already have friends on the platform? (That's the tipping point.) It designs what the experience should feel like at every stage -- when someone has zero friends on Sync (survival mode), when they have 2-3 friends (starting to click), and when they have 10+ (full value). It identifies "connector nodes" -- people with large, overlapping social networks who should be your very first users. And it evaluates every way to import contacts (phone, calendar, Instagram) ranked by how easy it is for the user and how privacy-safe it is.
+
+**Example:** "Design the Day 1 experience for someone who joins Sync before any of their friends" -- and it maps out what features still deliver value, what the "aha moment" is for a solo user, and what action they need to take to pull in their first friend.
+
+---
+
+### 5. @user-voice -- Your Research Partner
+
+**The problem it solves:** Your two best product insights (the override feature and the network effects priority) came from talking to just 10 people. But as you do more interviews, keeping track of what everyone said, spotting patterns, and turning raw notes into product decisions gets overwhelming.
+
+**What it does:** It prepares interview guides tailored to specific user segments (power users, people who churned, waitlist signups). After each interview, you feed it your notes and it extracts the structured data -- pain points, feature requests, NPS score, willingness to pay, key quotes. When you've done several interviews, it synthesizes everything: top themes ranked by frequency, NPS trend, feature priorities, and the questions you still haven't answered. It also flags when what people say they want doesn't match what they actually do.
+
+**Example:** "I just interviewed 5 waitlist signups, here are my notes" -- and it pulls out the patterns, updates your NPS, and tells you the top 3 things these users want that you don't have yet.
+
+---
+
+## How the Agents Work Together
+
+The agents aren't isolated -- they feed into each other:
+
+- **@user-voice** uncovers insights from interviews, which become hypotheses for **@experiment-lab**
+- **@experiment-lab** runs tests on growth ideas from **@growth-hacker** and recommendation changes from **@match-quality**
+- **@network-bootstrapper** builds the density that **@growth-hacker** needs for viral math to work
+- **@match-quality** gets better as **@network-bootstrapper** increases density (more friends = more data = better suggestions)
+
+The backbone is **@experiment-lab** -- every hypothesis from the other four agents flows through it for structured testing.
+
+---
+
+## Getting Started
+
+### What You Need
+1. **Claude Code** -- download it at [claude.ai/code](https://claude.ai/code) (available as a CLI, desktop app, or web app)
+2. **Google account** -- the agents create real documents and spreadsheets in Google Workspace
+
+### Your First Session
+
+Once Claude Code is open in this project folder, just type a command:
+
+```
+/experiment design "Referral onboarding flow achieves k > 0.5 in first cohort"
 ```
 
-## Project Structure
+That's it. The agent reads the command, understands the context (your pricing, your experiment history, your CAC data), and produces a complete experiment brief as a Google Doc.
 
-```
-sync-os/
-├── CLAUDE.md                          # System instructions (agents, workflows, context)
-├── README.md                          # This file
-├── .mcp.json                          # MCP server configuration
-├── .claude/
-│   ├── settings.local.json            # Tool permissions
-│   └── commands/
-│       ├── experiment.md              # /experiment command definition
-│       ├── growth.md                  # /growth command definition
-│       ├── match.md                   # /match command definition
-│       ├── bootstrap.md              # /bootstrap command definition
-│       └── research.md               # /research command definition
-└── agents/
-    ├── AGENTS-INDEX.md                # Agent registry and rationale
-    ├── experiment-lab/AGENT.md        # @experiment-lab full spec
-    ├── growth-hacker/AGENT.md         # @growth-hacker full spec
-    ├── match-quality/AGENT.md         # @match-quality full spec
-    ├── network-bootstrapper/AGENT.md  # @network-bootstrapper full spec
-    └── user-voice/AGENT.md            # @user-voice full spec
-```
+Other things to try:
 
-## Why These 5 Agents?
+| What You Want | What to Type |
+|---------------|-------------|
+| Design your next experiment | `/experiment design "your hypothesis here"` |
+| See your growth funnel | `/growth analyze` |
+| Check if suggestions are landing | `/match audit` |
+| Plan a city launch | `/bootstrap density-model zurich` |
+| Prep for user interviews | `/research prep "churned users"` |
+| Log interview notes | `/research log` (then paste your notes) |
+| See what users want most | `/research synthesize` |
+| Model the viral math | `/growth referral-model` |
+| Understand the cold start gap | `/bootstrap day-one solo` |
 
-Based on Sync's SFE memo:
+---
 
-1. **@experiment-lab** -- The SFE methodology is hypothesis-driven. Every product and growth decision should flow through a structured experiment cycle. This agent makes that process repeatable.
+## What's in This Repo
 
-2. **@growth-hacker** -- Experiment 2 proved paid acquisition doesn't work at $16.60 CAC on a $4.99/month product. Cracking organic/viral growth is existential. This agent models the math and designs the tests.
+| File | What It Is |
+|------|-----------|
+| `CLAUDE.md` | The "brain" -- all the context about Sync, your experiments, metrics, and workflows that the agents use |
+| `README.md` | This guide |
+| `.claude/commands/` | The 5 command definitions (one per agent) |
+| `agents/` | Detailed specs for each agent -- their purpose, rules, metrics, and how they connect |
 
-3. **@match-quality** -- "I'd rather go to a piano bar, not a violin concert." Experiment 1 surfaced the core product risk: if suggestions don't resonate, users stop opening the app. This agent tracks WHY suggestions miss and turns every override into training data for better recommendations.
+Everything is customized from your SFE memo: your pricing ($4.99 free/premium), your experiment results (10 pilot users, $16.60 CAC from Meta ads), your strategic decisions (geographic densification, organic over paid), and even the specific user feedback ("piano bar not violin concert").
 
-4. **@network-bootstrapper** -- Users said "friends need to already be on Sync" but someone has to go first. This is the classic cold start problem that kills social products. This agent models the density math, designs the solo-user experience, and identifies connector nodes that bootstrap network effects fastest.
+---
 
-5. **@user-voice** -- The best product insights so far (override feature, network effects priority) came from 10 user interviews. Scaling that research rigor is how Sync avoids building the wrong thing next.
+## Questions?
+
+This was built by Thomas Baker at Gold Star AI. Reach out if you want to customize anything, add more agents, or talk about how AI operating systems work at the product level.
 
 ---
 
