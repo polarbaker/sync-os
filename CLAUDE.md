@@ -6,13 +6,15 @@
 
 ## Start Here
 
-These 3 agents are purpose-built for where Sync is right now: validating product-market fit, solving the acquisition puzzle, and deeply understanding users.
+These 5 agents are purpose-built for where Sync is right now: validating product-market fit, solving the acquisition puzzle, understanding users, tuning recommendation quality, and cracking the cold start problem.
 
 | Agent | What It Does | Impact |
 |-------|--------------|--------|
 | **@experiment-lab** | Designs and tracks lean startup experiments with clear hypotheses, budgets, and theory updates | Decision quality |
 | **@growth-hacker** | Models viral loops, tracks CAC by channel, designs referral experiments, manages waitlist analytics | Revenue-generating |
 | **@user-voice** | Preps user interviews, synthesizes feedback, tracks NPS, surfaces feature priorities | Product-market fit |
+| **@match-quality** | Tracks suggestion acceptance/override rates, maps stated vs revealed preferences, tunes recommendations | Retention-critical |
+| **@network-bootstrapper** | Models network density, designs the solo-user experience, identifies connector nodes, plans city launches | Survival-critical |
 
 **Run first: `/experiment design "Referral onboarding reduces CAC below $3"`**
 
@@ -33,7 +35,7 @@ You help:
 
 ---
 
-## Agents (3 Total)
+## Agents (5 Total)
 
 ### Tier 1A - Flagship Agents
 
@@ -41,6 +43,8 @@ You help:
 |-------|---------|-------|
 | **@experiment-lab** | Designs experiments with hypotheses, success criteria, cost estimates, and theory-of-value updates | 10.0 |
 | **@growth-hacker** | Tracks acquisition funnels, models viral coefficients, designs referral experiments, optimizes CAC | 9.5 |
+| **@match-quality** | Measures suggestion quality, analyzes override patterns, maps preference gaps, designs recommendation A/B tests | 9.5 |
+| **@network-bootstrapper** | Models network density per city, designs cold start experiences, identifies connector nodes, plans bootstrapping | 9.5 |
 | **@user-voice** | Manages user research pipeline: interview prep, feedback capture, NPS tracking, pattern identification | 9.0 |
 
 ---
@@ -51,6 +55,8 @@ You help:
 |---------|-------|--------------|
 | `/experiment` | @experiment-lab | Design, track, or analyze an experiment |
 | `/growth` | @growth-hacker | Analyze acquisition data, model viral loops, plan referral tests |
+| `/match` | @match-quality | Audit suggestion quality, analyze overrides, build preference maps |
+| `/bootstrap` | @network-bootstrapper | Model network density, design cold start experiences, plan city launches |
 | `/research` | @user-voice | Prep interviews, log feedback, synthesize user insights |
 
 ---
@@ -139,6 +145,63 @@ Viral coefficient + k-factor projections (Google Doc)
 Referral experiment design -> @experiment-lab
 ```
 
+## Workflow: Suggestion Quality Loop
+
+```
+User receives suggestion
+     |
+     +--> Accepts --> Attends? --> @match-quality - /match scorecard
+     |
+     +--> Overrides --> WHY? --> @match-quality - /match override-analysis
+     |                                |
+     |                                v
+     |                    Override categories (wrong type / person / time / vibe)
+     |                                |
+     |                                v
+     |                    Algorithm improvement signal
+     |                                |
+     |                                v
+     |                    @match-quality - /match ab-test {change}
+     |                                |
+     |                                v
+     |                    @experiment-lab tracks the A/B test
+     |
+     +--> Ignores --> Silent churn signal --> @user-voice interview
+```
+
+## Workflow: Network Bootstrapping
+
+```
+@network-bootstrapper - /bootstrap density-model {city}
+     |
+     v
+Tipping point estimate (e.g., 800 users in Zurich)
+     |
+     v
+@network-bootstrapper - /bootstrap connector-analysis
+     |
+     v
+Connector recruiting playbook (who to target first)
+     |
+     v
+@network-bootstrapper - /bootstrap day-one solo
+     |
+     v
+Solo user experience design (what works with 0 friends?)
+     |
+     v
+@network-bootstrapper - /bootstrap import-analysis
+     |
+     v
+Contact import strategy (phone, calendar, social -- privacy-first)
+     |
+     v
+Launch in target city --> @network-bootstrapper - /bootstrap cohort-track
+     |
+     v
+@growth-hacker takes over when density reaches tipping point
+```
+
 ---
 
 ## Business Context
@@ -176,6 +239,11 @@ Paid acquisition does not work at current CAC. Path forward is organic/viral gro
 | Free-to-paid conversion | > 8% | < 3% |
 | Events scheduled/user/month | >= 3 | < 1 |
 | Events attended/scheduled | > 80% | < 50% |
+| Suggestion full-loop rate | > 40% | < 20% |
+| Override rate | < 25% | > 40% |
+| Solo user 7-day retention | > 60% | < 40% |
+| Friend overlap rate (per city) | > 30% | < 10% |
+| Time to first friend on Sync | < 14 days | > 30 days |
 | NPS | >= 50 | < 30 |
 | WTP (stated) | >= $4.99 | < $2.99 |
 | DAU/MAU ratio | > 30% | < 15% |
@@ -200,6 +268,12 @@ Paid acquisition does not work at current CAC. Path forward is organic/viral gro
 | **Churn** | Percentage of paying users who cancel per month |
 | **Cohort analysis** | Tracking behavior of user groups by signup date to spot retention trends |
 | **Activation rate** | Percentage of signups who complete core actions (add contacts, schedule first event) |
+| **Cold start** | The chicken-and-egg problem where the product needs users to be valuable, but users need the product to be valuable first |
+| **Connector node** | A user with a large, overlapping social network whose signup pulls in many friends |
+| **Tipping point** | The user count in a city where >50% of new signups already have friends on Sync |
+| **Full-loop rate** | Suggestion shown -> accepted -> attended. The metric that actually matters for recommendation quality |
+| **Override** | When a user replaces Sync's suggestion with their own choice. Training data, not failure |
+| **Stated vs revealed preference** | The gap between what users say they want (onboarding goals) and what they actually choose (behavior data) |
 
 ---
 
@@ -237,13 +311,14 @@ Paid acquisition does not work at current CAC. Path forward is organic/viral gro
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.1 | 2026-03-29 | Added @match-quality and @network-bootstrapper -- suggestion tuning and cold start agents |
 | 1.0 | 2026-03-29 | Initial Sync AI OS -- 3 agents for experiment tracking, growth optimization, user research |
 
 ---
 
 ## About This System
 
-Sync AI OS was built by Gold Star AI for Anouk Frieden as part of HBS Strategy for Entrepreneurs (1257). It provides 3 purpose-built agents targeting Sync's most critical operational needs at this stage: experiment rigor, growth optimization, and user understanding.
+Sync AI OS was built by Gold Star AI for Anouk Frieden as part of HBS Strategy for Entrepreneurs (1257). It provides 5 purpose-built agents targeting Sync's most critical operational needs: experiment rigor, growth optimization, user understanding, recommendation quality, and network bootstrapping.
 
 ---
 
